@@ -1,64 +1,175 @@
 # Capstone-Project-PoisonScope-Detecting-and-Analyzing-Backdoored-LLMs-on-Hugging-Face
-Large language models (LLMs) are rapidly evolving, revolutionizing natural language processing (NLP) applications.
 
-Pillar Security researchers have uncovered a dangerous new supply chain attack vector targeting the AI inference pipeline. This novel technique, termed "Poisoned GGUF Templates," allows attackers to embed malicious instructions that execute during model inference, compromising AI outputs. While developers and AI security vendors focus on validating user inputs and filtering model outputs, our research reveals the critical blind spot between them: the chat template layer.
-Large Language Models (LLMs) such as GPT, BLOOM, and LLaMA have achieved remarkable capabilities in understanding and generating human-like text.
+----------------
 
+# TextAttack Installation and Usage Guide (Revised)
 
-Automatically download and test LLMs against test cases (bias, hallucinations, fake news)
-Pipelines
-The pipelines are a great and easy way to use models for inference. These pipelines are objects that abstract most of the complex code from the library, offering a simple API dedicated to several tasks, including Named Entity Recognition, Masked Language Modeling, Sentiment Analysis, Feature Extraction and Question Answering. See the task summary for examples of use.
+## 🖥️ Windows Installation Requirements
 
-TextAttack: Dataset and model evaluation
-Why Text Attack?
-There are lots of reasons to use Text Attack:
-Understand NLP models better by running different adversarial attacks on them and examining the output
-Research and develop different NLP adversarial attacks using the TextAttack framework and library of components
-Augment your dataset to increase model generalization and robustness downstream
-Train NLP models using just a single command
+To install and run **TextAttack** on Windows 10 or 11, make sure you have the following:
 
+* **Windows 10 or 11** operating system
+* **Anaconda Distribution** installed
+* **MSVC Compiler** (required for building some Python packages)
 
+---
 
+## 📦 Step 1: Create a Conda Environment
 
-Literature Review
+Using Anaconda virtual environments ensures clean and isolated setups.
 
-Backdoored LLM Threats
-The attack exploits the GGUF (GPT-Generated Unified Format) model distribution standard to manipulate AI responses during normal conversations. By embedding persistent, malicious instructions directly within these chat templates, attackers can bypass all existing security controls. This targets a massive ecosystem, with hundreds of thousands of GGUF files currently distributed across platforms like Hugging Face. Attackers can smuggle malicious instructions into model components and even manipulate repositories to display clean templates online, while the actual downloaded file contains the poisoned version.
-This vector achieves a persistent compromise that affects every user interaction while remaining completely invisible to users and security systems. Because the attack is positioned between input validation and model output, it bypasses most existing AI guardrails, system prompts, and runtime monitoring. This attack remains undetected by current security scanners focused on infrastructure threats, creating a previously unknown supply chain compromise that fundamentally undermines user trust in AI-generated content.
-Primary Distribution Channels:
-HuggingFace: Hosting hundreds of thousands of GGUF files
-Ollama Registry: A curated but still community-driven repository
-Private Registries: Internal model repositories that often ingest models originally published on public hubs (e.g., a model pulled from HuggingFace and re-uploaded in-house). 
+```bash
+conda create -n textattack python=3.8
+conda activate textattack
+```
 
+---
 
-Key attack surfaces include (1) supply-chain exposure from those imported models and (2) insider threats - malicious or careless employees who can upload or tamper with models once they’re inside the private store.
+## 📥 Step 2: Install pycld2 Manually (Windows Requirement)
 
+TextAttack requires **pycld2**, which does **not** build automatically on Windows.
+You must install it manually from one of these sources:
 
+* PyPI: [https://pypi.org/project/pycld2/#files](https://pypi.org/project/pycld2/#files)
+* Christoph Gohlke’s Unofficial Binaries: [https://www.cgohlke.com/](https://www.cgohlke.com/)
 
+Install the appropriate `.whl` file for your Python version.
 
-Evaluating Bias in LLMs
-While the size and capabilities of large language models have drastically increased over the past couple of years, so too has the concern around biases imprinted into these models and their training data. In fact, many popular language models have been found to be biased against specific religions and genders, which can result in the promotion of discriminatory ideas and the perpetuation of harms against marginalized groups.
+---
 
+## ⚙️ Step 3: Install TextAttack
 
-Text Attack Framework
-TextAttack is a Python framework for adversarial attacks, adversarial training, and data augmentation in NLP.
-TextAttack makes experimenting with the robustness of NLP models seamless, fast, and easy. It’s also useful for NLP model training, adversarial training, and data augmentation.
-TextAttack provides components for common NLP tasks like sentence encoding, grammar-checking, and word replacement that can be used on their own.
-TextAttack does three things very well:
-Adversarial attacks (Python: textattack.Attack, Bash: textattack attack)
-Data augmentation (Python: textattack.augmentation.Augmenter, Bash: textattack augment)
-Model training (Python: textattack.Trainer, Bash: textattack train)
+Once pycld2 is installed, proceed with TextAttack:
 
+```bash
+pip install textattack
+pip install textattack[tensorflow]
+```
 
-NLP Attacks
-Text Attack provides a framework for constructing and thinking about generating inputs in NLP via perturbation attacks.
-Text Attack builds attacks from four components:
-Goal Functions: stipulate the goal of the attack, like to change the prediction score of a classification model, or to change all the words in a translation output.
-Constraints: determine if a potential perturbation is valid with respect to the original input.
-Transformations: take a text input and transform it by inserting and deleting characters, words, and/or phrases.
-Search Methods: explore the space of possible transformations within the defined constraints and attempt to find a successful perturbation which satisfies the goal function.
+Verify installation:
 
-Gradio
-Gradio is an open-source Python package that simplifies the process of building demos or web applications for machine learning models, APIs, or any Python function. With it, you can create demos or web applications without needing JavaScript, CSS, or web hosting experience. By writing just a few lines of Python code, you can unlock the power of Gradio and seamlessly showcase your machine-learning models to a broader audience.
-Gradio simplifies the development process by providing an intuitive framework that eliminates the complexities associated with building user interfaces from scratch. Whether you are a machine learning developer, researcher, or enthusiast, Gradio allows you to create beautiful and interactive demos that enhance the understanding and accessibility of your machine learning models.
-This open-source Python package helps you bridge the gap between your machine learning expertise and a broader audience, making your models accessible and actionable.
+```bash
+pip show textattack
+```
+
+---
+
+## ⚡ Optional: CUDA Acceleration
+
+If you have an NVIDIA GPU, you can enable hardware acceleration.
+
+Install **CUDA 11.0**, which is supported by both TensorFlow and PyTorch.
+
+NVIDIA CUDA 11.0 Guide:
+[https://docs.nvidia.com/cuda/archive/11.0/cuda-installation-guide-microsoft-windows/index.html](https://docs.nvidia.com/cuda/archive/11.0/cuda-installation-guide-microsoft-windows/index.html)
+
+After installing:
+
+```bash
+nvcc -V
+```
+
+This confirms CUDA is installed correctly.
+
+---
+
+# 📚 Training a Model with TextAttack
+
+### Preview the Dataset
+
+```bash
+textattack peek-dataset --dataset-from-huggingface rotten_tomatoes
+```
+
+### Train a Model (DistilBERT Example)
+
+```bash
+textattack train \
+  --model-name-or-path distilbert-base-uncased \
+  --dataset rotten_tomatoes \
+  --model-num-labels 2 \
+  --model-max-length 64 \
+  --per-device-train-batch-size 128 \
+  --num-epochs 1
+```
+
+This trains a binary classifier on the Rotten Tomatoes dataset.
+
+### Notes
+
+* Dataset is already lowercased → use **uncased model**
+* Max sequence length of 64 is sufficient
+
+---
+
+# 📈 Evaluation
+
+Once training is complete, evaluate the model:
+
+```bash
+textattack eval --num-examples 1000 \
+  --model ./outputs/2025-11-01-09-44-22-099720/best_model/ \
+  --dataset-from-huggingface rotten_tomatoes \
+  --dataset-split test
+```
+
+### Summary Achieved
+
+* Accuracy improved steadily across epochs
+* Loss decreased consistently
+* Output model saved automatically each epoch
+* Example result: **72.30% accuracy** on test set
+
+---
+
+# 🔥 Running Adversarial Attacks (TextFooler)
+
+Test model robustness using **TextFooler**:
+
+```bash
+textattack attack \
+  --recipe textfooler \
+  --num-examples 100 \
+  --model ./outputs/2025-11-01-09-44-22-099720/best_model/ \
+  --dataset-from-huggingface rotten_tomatoes \
+  --dataset-split test
+```
+
+### Example Attack Summary
+
+* Original accuracy: **83%**
+* Attack success rate: **100%**
+* Modified words per sample: **18.25%**
+* Queries per attack: **96.01**
+* Model accuracy under attack: **0%** (fully compromised)
+
+**Example:**
+Replacing "approach to material" with "approaches to equipment" flips model prediction despite similar meaning.
+
+---
+
+# 🎁 Bonus: Additional Attack Examples
+
+### DeepWordBug Attack
+
+```bash
+textattack attack \
+  --recipe deepwordbug \
+  --model lstm-mr \
+  --num-examples 2 \
+  --log-summary-to-json attack_summary.json
+```
+
+This generates a machine‑readable `attack_summary.json`.
+
+Enable advanced metrics:
+
+```bash
+textattack attack --model lstm-mr --recipe deepwordbug --num-examples 2 --attack-n --enable-advance-metrics
+```
+
+---
+
+# ✅ End of Documentation
+
+Let me know if you'd like this exported to **PDF**, **Markdown**, **DOCX**, or rewritten professionally!
