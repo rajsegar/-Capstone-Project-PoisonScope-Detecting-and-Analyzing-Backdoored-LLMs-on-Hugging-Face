@@ -1,6 +1,7 @@
+![text-attack-neon-background-crypto-concept-finance-text-attack-neon-background-331070890](https://github.com/user-attachments/assets/d86497d4-ed28-420e-a3b8-297627adde84)
 
-https://github.com/user-attachments/assets/a74ae18d-01f9-4663-9ea4-5c768f28127c
 
+<img width="628" height="198" alt="text im" src="https://github.com/user-attachments/assets/b29305f5-f984-4e9a-817d-bd3db90b803a" />
 
 # Capstone-Project-PoisonScope-Detecting-and-Analyzing-Backdoored-LLMs-on-Hugging-Face
 
@@ -168,6 +169,9 @@ Replacing "approach to material" with "approaches to equipment" flips model pred
 ---
 
 # ⚙️ Final Result
+
+
+https://github.com/user-attachments/assets/a74ae18d-01f9-4663-9ea4-5c768f28127c
 
 
 <img width="356" height="259" alt="Capture" src="https://github.com/user-attachments/assets/31725c1d-2cd7-4650-9a16-1ac1a679826e" />
