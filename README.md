@@ -167,6 +167,11 @@ Replacing "approach to material" with "approaches to equipment" flips model pred
 
 ---
 
+# ⚙️ Final Result
+
+
+<img width="356" height="259" alt="Capture" src="https://github.com/user-attachments/assets/31725c1d-2cd7-4650-9a16-1ac1a679826e" />
+
 # 🎁 Bonus: Additional Attack Examples
 
 ### DeepWordBug Attack
