@@ -5,6 +5,8 @@
 
 # Capstone-Project-PoisonScope-Detecting-and-Analyzing-Backdoored-LLMs-on-Hugging-Face
 
+<img width="731" height="333" alt="28757blog_textattack drawio" src="https://github.com/user-attachments/assets/79e1100c-b459-4cf3-9ef9-0216e73f548a" />
+
 ----------------
 # 🚀 Overview
 
@@ -22,6 +24,9 @@ Generate detailed summaries and metrics that highlight vulnerabilities in langua
 
 This documentation serves as a practical guide for anyone looking to explore adversarial NLP, understand model weaknesses, and integrate adversarial testing into their ML pipelines.
 
+
+![images](https://github.com/user-attachments/assets/255735e2-9dbb-42f8-8152-e53b0e7ee504)
+
 # TextAttack Installation and Usage Guide (Revised)
 
 ## 🖥️ Windows Installation Requirements
@@ -33,6 +38,8 @@ To install and run **TextAttack** on Windows 10 or 11, make sure you have the fo
 * **MSVC Compiler** (required for building some Python packages)
 
 ---
+
+<img width="850" height="234" alt="Developing-attacks-in-TextAttack-119" src="https://github.com/user-attachments/assets/9153f543-d5e1-40f2-a79a-25d4e5938f0b" />
 
 ## 📦 Step 1: Create a Conda Environment
 
