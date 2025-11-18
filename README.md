@@ -1,7 +1,7 @@
 # Capstone-Project-PoisonScope-Detecting-and-Analyzing-Backdoored-LLMs-on-Hugging-Face
 
 ----------------
-🚀 Overview
+# 🚀 Overview
 
 This project provides a complete, end‑to‑end workflow for working with TextAttack, a powerful framework for training, evaluating, and attacking NLP models. It demonstrates how to:
 
