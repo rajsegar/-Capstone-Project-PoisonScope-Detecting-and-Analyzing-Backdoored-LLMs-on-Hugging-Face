@@ -1,3 +1,7 @@
+
+https://github.com/user-attachments/assets/a74ae18d-01f9-4663-9ea4-5c768f28127c
+
+
 # Capstone-Project-PoisonScope-Detecting-and-Analyzing-Backdoored-LLMs-on-Hugging-Face
 
 ----------------
@@ -186,9 +190,7 @@ textattack attack --model lstm-mr --recipe deepwordbug --num-examples 2 --attack
 ---
 
 # ✅ End of Documentation
+
 ## 🔒 Security & Red Teaming
-
-[Watch Demo Video](https://www.youtube.com/watch?v=Gy-aPBb0djk)
-
 
 
