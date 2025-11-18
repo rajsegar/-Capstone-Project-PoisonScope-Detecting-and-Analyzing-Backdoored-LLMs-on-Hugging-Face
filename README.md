@@ -188,5 +188,6 @@ textattack attack --model lstm-mr --recipe deepwordbug --num-examples 2 --attack
 # ✅ End of Documentation
 ## 🔒 Security & Red Teaming
 
-[Watch Video](assets/demo.mp4)
+![Demo](assets/demo.gif)
+
 
